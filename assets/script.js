@@ -21,9 +21,12 @@ let score = 0;
 
 timeEl.setAttribute('style', 'text-align:right; font-size: 20px; font-weight: 100;');
 
+// TO DO: Display score somewhere on top of page
+
 // var showScore = document.createElement('h4');
-// header.appendChild('showScore');
 // showScore.innerHTML = 'Score: ' + score;
+// header.appendChild('showScore');
+
 
 // Storing quiz information in an array
 
@@ -50,6 +53,7 @@ var questionsArray = [
     }
 ];
 
+// TO DO: Debug so that timer starts immediately upon clicking 'Start'
 // Setting timer/interval
 
 function setTimer() {
@@ -99,8 +103,10 @@ function displayChoices(event) {
     }
     currentIndex++;
     displayQuestion();
-    // TO DO:
-    // if (questionsArray[currentIndex].choices === null) {
+
+    // TO DO: need to show aquireInitals once questions loop is over
+    
+    // if (questionsArray[currentIndex].choices === undefined) {
     //     getInitials();
     // }
 }
@@ -137,7 +143,7 @@ function gameOver() {
 
     // TO DO: create high score data table
 
-    // created a play again button entirely in js
+    // created a 'play again' button
     var playAgainBtn = document.createElement('button');
     playAgainBtn.setAttribute('class', 'play-again');
     playAgainBtn.innerHTML = 'Play Again';
@@ -155,3 +161,18 @@ startButton.addEventListener('click', function() {
 });
 
 submitInitials.addEventListener('click', submitBtn);
+
+
+
+// Reference for highScore table: (?)
+// for (i=0; i<4; i++) {
+//     tableRow = document.createElement('tr');
+//     table.appendChild(tableRow);   
+//     tableRow.setAttribute('style', 'height: auto; width: auto;')
+//     for (j=0; j<4; j++) {  
+//         eachBox = document.createElement('td');
+//         tableRow.appendChild(eachBox);
+//         eachBox.textContent = count++;
+//         eachBox.setAttribute('style', 'border: 1px solid black; height: 200px; width: 200px; text-align: center; line-height: 200px; font-size: 150px; font-weight:bold;'); 
+//     };
+// };
