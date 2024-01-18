@@ -9,24 +9,28 @@ var quizScreen = document.querySelector('#quiz');
 var questions = document.querySelector('.questions');
 var answerChoices = document.querySelector('#answers');
 var aquireInitials = document.querySelector('#aquire-initials');
+var initials = document.querySelector('#initials');
 var submitInitials = document.querySelector('#submit-initials');
 var highScores = document.querySelector('#high-score');
+var scoreTable = document.querySelector('.score-table');
 
 // Defining other variables
 
 var currentIndex = 0;
 let score = 0;
 
-// Setting attributes 
+// Setting header items in JavaScript instead of HTML
 
-timeEl.setAttribute('style', 'text-align:right; font-size: 20px; font-weight: 100;');
+var showScore = document.createElement('h4');
+var paintScore = ()=>showScore.innerHTML = 'Score: ' + score;
+header.appendChild(showScore);
+showScore.classList.add('show-score')
+paintScore();
 
-// TO DO: Display score somewhere on top of page
-
-// var showScore = document.createElement('h4');
-// showScore.innerHTML = 'Score: ' + score;
-// header.appendChild('showScore');
-
+var highScoreBtn = document.createElement('button');
+highScoreBtn.textContent = 'View High Scores';
+highScoreBtn.setAttribute('class', 'high-score-btn');
+header.append(highScoreBtn);
 
 // Storing quiz information in an array
 
@@ -53,19 +57,22 @@ var questionsArray = [
     }
 ];
 
-// TO DO: Debug so that timer starts immediately upon clicking 'Start'
+
 // Setting timer/interval
 
-function setTimer() {
-    var secondsLeft = 10;
+var timerInterval;
+var secondsLeft;
 
-    var timerInterval = setInterval(function() {
+function setTimer() {
+    secondsLeft = 30;
+
+    timerInterval = setInterval(function() {
         if (secondsLeft >= 0) {
             timeEl.textContent = 'Time: ' + secondsLeft;
             secondsLeft--;
         } else {
             clearInterval(timerInterval);
-            gameOver();
+            getInitials();
         }
 
     }, 1000)
@@ -76,13 +83,14 @@ function setTimer() {
 function startQuiz() {
     startScreen.classList.add('hide');
     quizScreen.classList.remove('hide');
+    setTimer();
     displayQuestion();
 }
 
 function displayQuestion() {
     answerChoices.innerHTML = '';
-    var currentQuestion = questionsArray[currentIndex].question;
-    var choicesArr = questionsArray[currentIndex].choices;
+    var currentQuestion = questionsArray[currentIndex]?.question;
+    var choicesArr = questionsArray[currentIndex]?.choices;
 
     questions.textContent = currentQuestion;
     
@@ -96,31 +104,42 @@ function displayQuestion() {
     
 }
 
+var displayMessage = document.createElement('p');
+displayMessage.classList.add('display-message');
+
+
 function displayChoices(event) {
-    var element = event.target;
+   
+
+    var element = event.target.innerHTML;
+
+
     if (element === questionsArray[currentIndex].answer) {
         score++;
+        paintScore();
+        if (document.querySelector('p') == undefined) {
+            quizScreen.appendChild(displayMessage);
+        }
+        displayMessage.textContent = 'Correct!';
+        
+    } else {
+        secondsLeft -= 10;
+        if (document.querySelector('p') == undefined) {
+            quizScreen.appendChild(displayMessage);
+        }
+        displayMessage.textContent = 'Wrong!';
     }
-    currentIndex++;
-    displayQuestion();
+    ++currentIndex;
+    if (currentIndex < questionsArray.length) {
 
-    // TO DO: need to show aquireInitals once questions loop is over
-    
-    // if (questionsArray[currentIndex].choices === undefined) {
-    //     getInitials();
-    // }
+        displayQuestion();
+    } else {
+        quizScreen.removeChild(displayMessage);
+        getInitials();
+    }
 }
 
-function restartQuiz() {
-    score = 0;
-    currentIndex = 0;
-    highScores.classList.add('hide');
-    quizScreen.classList.remove('hide');
-    setTimer();
-    displayQuestion();
-}
-
-// Aquiring initials functions
+//Get initials from user
 
 function getInitials() {
     clearInterval(timerInterval);
@@ -128,51 +147,68 @@ function getInitials() {
     aquireInitials.classList.remove('hide');
 }
 
+// Aquiring initials functions
+
 function submitBtn(event) {
     event.preventDefault();
+    
+    var userScore = {
+        user: initials.value.trim(),
+        score: score
+    }
 
-    //  TO DO: need to store initials and score in highScores element before resetting score to zero
-
+    localStorage.setItem('userInfo', JSON.stringify(userScore));
     gameOver();
 }
 
-function gameOver() {
-    quizScreen.classList.add('hide');
-    aquireInitials.classList.add('hide');
-    highScores.classList.remove('hide');
-
-    // TO DO: create high score data table
-
-    // created a 'play again' button
-    var playAgainBtn = document.createElement('button');
-    playAgainBtn.setAttribute('class', 'play-again');
-    playAgainBtn.innerHTML = 'Play Again';
-    highScores.appendChild(playAgainBtn);
-    playAgainBtn.addEventListener('click', restartQuiz);
+function restartQuiz() {
+    clearInterval(timerInterval);
+    score = 0;
+    currentIndex = 0;
+    highScores.classList.add('hide');
+    quizScreen.classList.remove('hide');
+    paintScore();
+    setTimer();
+    displayQuestion();
 }
 
+function displayHighScores() {
+    clearInterval(timerInterval);
+    var userScore = JSON.parse(localStorage.getItem('userInfo'));
+    if (userScore !== null)  {
+        var tableRow = document.createElement('tr');
+        tableRow.textContent = 'User: ' + userScore.user.toUpperCase() + ' --> Score: ' + userScore.score;
+        scoreTable.appendChild(tableRow);
+    } else {
+        return;
+    }
+}
+
+function gameOver() {
+    viewHighScore();
+    displayHighScores();
+}
+
+function viewHighScore() {
+    clearInterval(timerInterval);
+    startScreen.classList.add('hide');
+    quizScreen.classList.add('hide');
+    aquireInitials.classList.add('hide');
+    highScores.classList.remove('hide'); 
+    
+    if (document.querySelector('.play-again') == undefined) {
+        var playAgainBtn = document.createElement('button');
+        playAgainBtn.setAttribute('class', 'play-again');
+        playAgainBtn.innerHTML = 'Play Again';
+        highScores.appendChild(playAgainBtn);
+        playAgainBtn.addEventListener('click', restartQuiz);
+    }
+}
 
 // Event listeners
 
-startButton.addEventListener('click', function() {
-    setTimer();
-    startQuiz();
-
-});
+startButton.addEventListener('click', startQuiz);
 
 submitInitials.addEventListener('click', submitBtn);
 
-
-
-// Reference for highScore table: (?)
-// for (i=0; i<4; i++) {
-//     tableRow = document.createElement('tr');
-//     table.appendChild(tableRow);   
-//     tableRow.setAttribute('style', 'height: auto; width: auto;')
-//     for (j=0; j<4; j++) {  
-//         eachBox = document.createElement('td');
-//         tableRow.appendChild(eachBox);
-//         eachBox.textContent = count++;
-//         eachBox.setAttribute('style', 'border: 1px solid black; height: 200px; width: 200px; text-align: center; line-height: 200px; font-size: 150px; font-weight:bold;'); 
-//     };
-// };
+highScoreBtn.addEventListener('click', viewHighScore);
