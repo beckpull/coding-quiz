@@ -9,7 +9,7 @@ var quizScreen = document.querySelector('#quiz');
 var questions = document.querySelector('.questions');
 var answerChoices = document.querySelector('#answers');
 var aquireInitials = document.querySelector('#aquire-initials');
-var initials = document.querySelector('#initials').value;
+var initials = document.querySelector('#initials');
 var submitInitials = document.querySelector('#submit-initials');
 var highScores = document.querySelector('#high-score');
 var scoreTable = document.getElementsByClassName('score-table');
@@ -146,12 +146,11 @@ function submitBtn(event) {
     event.preventDefault();
     
     var userScore = {
-        user: initials,
+        user: initials.value.trim(),
         score: score
     }
 
     localStorage.setItem('userInfo', JSON.stringify(userScore));
-
     gameOver();
 }
 
@@ -159,15 +158,11 @@ displayHighScores = ()=> {
     clearInterval(timerInterval);
     var userScore = JSON.parse(localStorage.getItem('userInfo'));
 
-    if (!userScore) {
-        return;
-    } else {
+    if (userScore !== null)  {
         var tableRow = document.createElement('tr');
         scoreTable.appendChild(tableRow);
         tableRow.textContent = userScore;
-    }
-    
-    
+    } 
 }
 
 function gameOver() {
@@ -175,7 +170,7 @@ function gameOver() {
     quizScreen.classList.add('hide');
     aquireInitials.classList.add('hide');
     highScores.classList.remove('hide');
-    // displayHighScores();
+    displayHighScores();
 
 
     if (document.querySelector('.play-again') == undefined) {
