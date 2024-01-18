@@ -145,6 +145,12 @@ function getInitials() {
     clearInterval(timerInterval);
     quizScreen.classList.add('hide');
     aquireInitials.classList.remove('hide');
+    var roundScore = document.createElement('h4');
+    roundScore.setAttribute('class', 'round-score');
+    roundScore.textContent = 'Your final score this round was: ' + score + '!';
+    if (document.querySelector('.round-score') == undefined) {
+         aquireInitials.h2.appendChild(roundScore);
+    }
 }
 
 // Aquiring initials functions
