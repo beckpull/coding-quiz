@@ -1,3 +1,5 @@
+/* Defining color and font variables */
+
 :root {
     --primary-light: #696EAD;
     --primary-mid: #903749;
@@ -7,6 +9,8 @@
     --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     --primary-font-size: 25px;
 }
+
+/* Body element styles */
 
 body {
     color: var(--primary-dark);
@@ -55,40 +59,42 @@ button {
 
 }
 
+/* Pseudoclass for button elements */
 button:hover {
     opacity: 80%;
 }
 
-/* hide/unhide html body elements */
+/* Hide/unhide html divs */
 .hide {
     display: none;
 }
 
-/* Welcome to my coding quiz header */
+/* Start screen header styles */
 .welcome {
     font-size: 50px;
     text-align: center;
 }
 
+/* Timer countdown font-size */
 .time {
     font-size: 17px;
 }
 
-/* score element */
+/* Score element styles */
 .show-score {
     line-height: 0;
     display: inline-flex;
     font-size: 17px;
 }
 
-/* show high score button */
+/* High score button styles */
 .high-score-btn {
     display: inline-flex;
     font-size: var(--primary-font-size);
     padding-top: 7px;
 }
 
-/* start screen */
+/* Start screen */
 #start-screen {
     text-align: center;
     background-color: var(--primary-light);
@@ -100,38 +106,39 @@ button:hover {
     padding: 5px 10px 5px 10px;
 }
 
-/* questions format */
+/* Questions font-size */
 .questions {
     font-size: var(--primary-font-size);
 }
 
-/* answer choice buttons format */
+/* Answer choice buttons styles */
 .choice-button {
     font-size: var(--primary-font-size);
     display: block;
 }
 
+/* Center aquire-initials div */
 #aquire-initials {
     text-align: center;
 }
 
-/* initials input */
+/* Initials input font-size */
 #initials {
     font-size: var(--primary-font-size);
 }
 
-/* submit intiials button */
+/* Submit intiials button styles */
 #submit-initials {
     font-size: var(--primary-font-size);
 }
 
-/* high score table element */
+/* High-score table element styles*/
 #high-score {
     text-align: center;
     font-size: var(--primary-font-size);
 }
 
-/* play again button */
+/* Play again button styles */
 .play-again {
     font-size: var(--primary-font-size);
 }
