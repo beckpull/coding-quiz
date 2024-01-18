@@ -14,12 +14,12 @@ var submitInitials = document.querySelector('#submit-initials');
 var highScores = document.querySelector('#high-score');
 var scoreTable = document.querySelector('.score-table');
 
-// Defining other variables
+// Defining other variables needed for header items
 
 var currentIndex = 0;
 let score = 0;
 
-// Setting header items in JavaScript instead of HTML
+// Setting header items (in JavaScript vs HTML)
 
 var showScore = document.createElement('h4');
 var paintScore = ()=>showScore.innerHTML = 'Score: ' + score;
@@ -78,7 +78,7 @@ function setTimer() {
     }, 1000)
 }
 
-// Quiz functions
+// Quiz screen functions
 
 function startQuiz() {
     startScreen.classList.add('hide');
@@ -138,18 +138,6 @@ function displayChoices(event) {
         getInitials();
     }
 }
-var addScore;
-var currentScore;
-
-//Show most recent round's score when getting initials from user
-
-var roundScore = function() {
-    addScore = document.querySelector('#add-score');
-    currentScore = document.createElement('h4');
-    addScore.appendChild(currentScore); 
-    currentScore.textContent = 'Your final score this round was ' + score + '!';
-    currentScore.classList.add('round-score');
-}
 
 // Navigate to aquiring initial screen
 
@@ -160,7 +148,20 @@ function getInitials() {
     roundScore();
 }
 
-// Aquiring initials functions
+//Show most recent round's score while getting initials from user
+
+var addScore;
+var currentScore;
+
+var roundScore = function() {
+    addScore = document.querySelector('#add-score');
+    currentScore = document.createElement('h4');
+    addScore.appendChild(currentScore); 
+    currentScore.textContent = 'Your final score this round was ' + score + '!';
+    currentScore.classList.add('round-score');
+}
+
+// Aquiring/storing user initials
 
 function submitBtn(event) {
     event.preventDefault();
@@ -172,17 +173,6 @@ function submitBtn(event) {
 
     localStorage.setItem('userInfo', JSON.stringify(userScore));
     gameOver();
-}
-
-function restartQuiz() {
-    clearInterval(timerInterval);
-    score = 0;
-    currentIndex = 0;
-    highScores.classList.add('hide');
-    quizScreen.classList.remove('hide');
-    paintScore();
-    setTimer();
-    displayQuestion();
 }
 
 function displayHighScores() {
@@ -214,8 +204,20 @@ function viewHighScore() {
         playAgainBtn.setAttribute('class', 'play-again');
         playAgainBtn.innerHTML = 'Play Again';
         highScores.appendChild(playAgainBtn);
+        // New play again button's event listener:
         playAgainBtn.addEventListener('click', restartQuiz);
     }
+}
+
+function restartQuiz() {
+    clearInterval(timerInterval);
+    score = 0;
+    currentIndex = 0;
+    highScores.classList.add('hide');
+    quizScreen.classList.remove('hide');
+    paintScore();
+    setTimer();
+    displayQuestion();
 }
 
 // Event listeners
