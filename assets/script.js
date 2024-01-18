@@ -72,6 +72,7 @@ function setTimer() {
             secondsLeft--;
         } else {
             clearInterval(timerInterval);
+            quizScreen.removeChild(displayMessage);
             getInitials();
         }
 
