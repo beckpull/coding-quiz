@@ -1,3 +1,122 @@
+:root {
+    --primary-light: #696EAD;
+    --primary-mid: #903749;
+    --primary-dark: #2B2E4A;
+    --primary-contrast: #E84545;
+    --primary-header: #53354A;
+    --font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --primary-font-size: 25px;
+}
+
+body {
+    color: var(--primary-dark);
+    background-color: var(--primary-light);
+    font-family: var(--font-family);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    line-height: 0;
+}
+
+p {
+    padding-top: 20px;
+    border-top: 1px solid var(--primary-dark);
+    margin: 5% 70% 0 0;
+}
+
+h5 {
+    text-align: center;
+    font-size: 50px;
+    color: #686DAA;
+}
+
+button {
+    background-color: var(--primary-mid);
+    border-radius: 10px;
+    color: var(--primary-contrast);
+    font-family: var(--font-family);
+}
+
+button:hover {
+    opacity: 80%;
+}
+
+/* hide/unhide html body elements */
 .hide {
     display: none;
+}
+
+/* Welcome to my coding quiz header */
+.welcome {
+    font-size: 50px;
+    text-align: center;
+}
+
+/* score element */
+.show-score {
+    line-height: 0;
+    display: inline-flex;
+    font-size: var(--primary-font-size);
+}
+
+/* show high score button */
+.high-score-btn {
+    display: inline-flex;
+    font-size: var(--primary-font-size);
+    padding-top: 15px;
+}
+
+/* start screen */
+#start-screen {
+    text-align: center;
+    background-color: var(--primary-light);
+}
+
+/* Start Quiz button */
+#start-quiz {
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+}
+
+/* timer formatting */
+.time {
+    font-size: var(--primary-font-size);
+}
+
+/* questions format */
+.questions {
+    font-size: var(--primary-font-size);
+}
+
+/* answer choice buttons format */
+.choice-button {
+    font-size: var(--primary-font-size);
+    display: block;
+}
+
+/* aquire initials whole div */
+#aquire-initials {
+    font-size: 20px;
+}
+
+/* initials input */
+#initials {
+    font-size: var(--primary-font-size);
+}
+
+/* submit intiials button */
+#submit-initials {
+    font-size: var(--primary-font-size);
+}
+
+/* high score table element */
+.score-table {
+    font-size: var(--primary-font-size);
+}
+
+/* play again button */
+.play-again {
+    font-size: var(--primary-font-size);
 }
