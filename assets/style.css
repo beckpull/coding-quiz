@@ -26,6 +26,20 @@ p {
     margin: 5% 70% 0 0;
 }
 
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: var(--primary-font-size);
+    line-height: 1;
+}
+
+h4 {
+    font-size: 15px;
+    line-height: 1;
+}
+
 h5 {
     text-align: center;
     font-size: 50px;
@@ -34,9 +48,11 @@ h5 {
 
 button {
     background-color: var(--primary-mid);
+    border: 2px solid var(--primary-header);
     border-radius: 10px;
     color: var(--primary-contrast);
     font-family: var(--font-family);
+
 }
 
 button:hover {
@@ -54,18 +70,22 @@ button:hover {
     text-align: center;
 }
 
+.time {
+    font-size: 17px;
+}
+
 /* score element */
 .show-score {
     line-height: 0;
     display: inline-flex;
-    font-size: var(--primary-font-size);
+    font-size: 17px;
 }
 
 /* show high score button */
 .high-score-btn {
     display: inline-flex;
     font-size: var(--primary-font-size);
-    padding-top: 15px;
+    padding-top: 7px;
 }
 
 /* start screen */
@@ -80,11 +100,6 @@ button:hover {
     padding: 5px 10px 5px 10px;
 }
 
-/* timer formatting */
-.time {
-    font-size: var(--primary-font-size);
-}
-
 /* questions format */
 .questions {
     font-size: var(--primary-font-size);
@@ -96,9 +111,8 @@ button:hover {
     display: block;
 }
 
-/* aquire initials whole div */
-#aquire-initials h3 {
-    font-size: 20px;
+#aquire-initials {
+    text-align: center;
 }
 
 /* initials input */
@@ -112,7 +126,8 @@ button:hover {
 }
 
 /* high score table element */
-.score-table {
+#high-score {
+    text-align: center;
     font-size: var(--primary-font-size);
 }
 

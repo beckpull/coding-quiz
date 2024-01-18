@@ -138,27 +138,33 @@ function displayChoices(event) {
         getInitials();
     }
 }
+var addScore;
+var currentScore;
 
-//Get initials from user
+//Show most recent round's score when getting initials from user
+
+var roundScore = function() {
+    addScore = document.querySelector('#add-score');
+    currentScore = document.createElement('h4');
+    addScore.appendChild(currentScore); 
+    currentScore.textContent = 'Your final score this round was ' + score + '!';
+    currentScore.classList.add('round-score');
+}
+
+// Navigate to aquiring initial screen
 
 function getInitials() {
     clearInterval(timerInterval);
     quizScreen.classList.add('hide');
     aquireInitials.classList.remove('hide');
-
-    if (document.querySelector('h4') == undefined) {
-        var roundScore = document.createElement('h4');
-        document.getElementbyId('add-score').appendChild(roundScore);
-        roundScore.textContent = 'Your final score this round was: ' + score + '!';
-        roundScore.setAttribute('class', 'round-score');
-    }
+    roundScore();
 }
 
 // Aquiring initials functions
 
 function submitBtn(event) {
     event.preventDefault();
-    
+    addScore.removeChild(currentScore);
     var userScore = {
         user: initials.value.trim(),
         score: score
@@ -184,7 +190,7 @@ function displayHighScores() {
     var userScore = JSON.parse(localStorage.getItem('userInfo'));
     if (userScore !== null)  {
         var tableRow = document.createElement('tr');
-        tableRow.textContent = 'User: ' + userScore.user.toUpperCase() + ' --> Score: ' + userScore.score;
+        tableRow.innerHTML = '<td>User: ' + userScore.user.toUpperCase() + '</td><td> ---> </td><td>Score: ' + userScore.score + '</td>';
         scoreTable.appendChild(tableRow);
     } else {
         return;
