@@ -54,6 +54,36 @@ var questionsArray = [
         question: 'Which of the following is not considered an object/type in JavaScript?',
         choices: ['string', 'array', 'integer', 'operator'],
         answer: 'operator'
+    },
+    {
+        question: 'What is the syntax for logging something into the console using JavaScript?',
+        choices: ['consolelog();', 'console(log);', 'console.log();', 'consoleLog();'],
+        answer: 'console.log();'
+    },
+    {
+        question: 'Where is the link to a CSS file supposed to live within HTML structure?',
+        choices: ['Last item in the body element', 'Right after the <html> tag', 'In the head element right before <meta> tags', 'In the head element before the title'],
+        answer: 'In the head element before the title'
+    },
+    {
+        question: 'Where does the linked JavaScript file live within HTml structure? ',
+        choices: ['Last item in the body element', 'Right after the <html> tag', 'In the head element right before <meta> tags', 'In the head element before the title'],
+        answer: 'Last item in the body element'
+    },
+    {
+        question: 'When you clone a GitHub repo onto your local machine and want to create your own workspace to edit/save your work in (without affecting the remote GitHub code at all) what creates that local workspace?',
+        choices: ['Repository', 'Pull request', 'git clone', 'branch'],
+        answer: 'branch'
+    },
+    {
+        question: 'When you have changes in your local machine that you want to update the remote GitHub repo with: what will you need?',
+        choices: ['Repository', 'Pull request', 'git clone', 'branch'],
+        answer: 'Pull request'
+    },
+    {
+        question: 'What are the commonly used/highly recommended GitHub repository introduction pages that explain each application and how to use them known as?',
+        choices: ['GitLab', 'Licenses', 'README files', 'Cover letters'],
+        answer: 'README files'
     }
 ];
 
@@ -64,7 +94,7 @@ var timerInterval;
 var secondsLeft;
 
 function setTimer() {
-    secondsLeft = 30;
+    secondsLeft = 60;
 
     timerInterval = setInterval(function() {
         if (secondsLeft >= 0) {

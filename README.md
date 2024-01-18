@@ -41,6 +41,8 @@ This is what you can expect to see upon opening the page:
 * Javascript
 * HTML
 * CSS
+* Git process
+* README files
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
