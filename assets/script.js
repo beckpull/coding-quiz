@@ -9,6 +9,7 @@ var quizScreen = document.querySelector('#quiz');
 var questions = document.querySelector('.questions');
 var answerChoices = document.querySelector('#answers');
 var aquireInitials = document.querySelector('#aquire-initials');
+var initials = document.querySelector('#initials').value;
 var submitInitials = document.querySelector('#submit-initials');
 var highScores = document.querySelector('#high-score');
 
@@ -23,10 +24,10 @@ timeEl.setAttribute('style', 'text-align:right; font-size: 20px; font-weight: 10
 
 // TO DO: Display score somewhere on top of page
 
-// var showScore = document.createElement('h4');
-// showScore.innerHTML = 'Score: ' + score;
-// header.appendChild('showScore');
-
+var showScore = document.createElement('h4');
+var paintScore = ()=>showScore.innerHTML = 'Score: ' + score;
+header.appendChild(showScore);
+paintScore();
 
 // Storing quiz information in an array
 
@@ -76,13 +77,15 @@ function setTimer() {
 function startQuiz() {
     startScreen.classList.add('hide');
     quizScreen.classList.remove('hide');
+
+    setTimer();
     displayQuestion();
 }
 
 function displayQuestion() {
     answerChoices.innerHTML = '';
-    var currentQuestion = questionsArray[currentIndex].question;
-    var choicesArr = questionsArray[currentIndex].choices;
+    var currentQuestion = questionsArray[currentIndex]?.question;
+    var choicesArr = questionsArray[currentIndex]?.choices;
 
     questions.textContent = currentQuestion;
     
@@ -97,12 +100,19 @@ function displayQuestion() {
 }
 
 function displayChoices(event) {
-    var element = event.target;
+    var element = event.target.innerHTML;
+    console.log(element);
     if (element === questionsArray[currentIndex].answer) {
         score++;
+        paintScore();
     }
-    currentIndex++;
-    displayQuestion();
+    ++currentIndex;
+    if (currentIndex < questionsArray.length) {
+
+        displayQuestion();
+    }
+
+
 
     // TO DO: need to show aquireInitals once questions loop is over
     
@@ -130,7 +140,7 @@ function getInitials() {
 
 function submitBtn(event) {
     event.preventDefault();
-
+    
     //  TO DO: need to store initials and score in highScores element before resetting score to zero
 
     gameOver();
@@ -140,25 +150,22 @@ function gameOver() {
     quizScreen.classList.add('hide');
     aquireInitials.classList.add('hide');
     highScores.classList.remove('hide');
-
     // TO DO: create high score data table
 
-    // created a 'play again' button
-    var playAgainBtn = document.createElement('button');
-    playAgainBtn.setAttribute('class', 'play-again');
-    playAgainBtn.innerHTML = 'Play Again';
-    highScores.appendChild(playAgainBtn);
-    playAgainBtn.addEventListener('click', restartQuiz);
+
+    if (document.querySelector('.play-again') == undefined) {
+        var playAgainBtn = document.createElement('button');
+        playAgainBtn.setAttribute('class', 'play-again');
+        playAgainBtn.innerHTML = 'Play Again';
+        highScores.appendChild(playAgainBtn);
+        playAgainBtn.addEventListener('click', restartQuiz);
+    }
 }
 
 
 // Event listeners
 
-startButton.addEventListener('click', function() {
-    setTimer();
-    startQuiz();
-
-});
+startButton.addEventListener('click', startQuiz);
 
 submitInitials.addEventListener('click', submitBtn);
 
